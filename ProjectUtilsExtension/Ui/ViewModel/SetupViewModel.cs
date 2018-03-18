@@ -1,4 +1,6 @@
-﻿using ProjectUtilsExtension.Helpers;
+﻿using System.Windows.Forms;
+using ProjectUtilsExtension.Core;
+using ProjectUtilsExtension.Helpers;
 
 namespace ProjectUtilsExtension.Ui.ViewModel
 {
@@ -22,34 +24,56 @@ namespace ProjectUtilsExtension.Ui.ViewModel
             }
         }
 
-        public DelegateCommand SaveProjectUtilsPathCommand { get; private set; }
-        public DelegateCommand SaveDestPathCommand { get; private set; }
+        public DelegateCommand BrowseProjectUtilsCommand { get; private set; }
+        public DelegateCommand BrowseDestFolderCommand { get; private set; }
+        public DelegateCommand SaveCommand { get; private set; }
 
         public SetupViewModel() {
             InitializeCommands();
         }
 
         private void InitializeCommands() {
-            SaveProjectUtilsPathCommand = new DelegateCommand(SaveProjectUtilsPath, CanSaveProjectUtilsPath);
-            SaveDestPathCommand = new DelegateCommand(SaveDestPath, CanSaveDestPath);
+            BrowseProjectUtilsCommand = new DelegateCommand(BrowseProjectUtils);
+            BrowseDestFolderCommand = new DelegateCommand(BrowseDestFolder);
+            SaveCommand = new DelegateCommand(Save, CanSave);
         }
 
-        private void SaveProjectUtilsPath(object obj) {
+        private void BrowseProjectUtils(object obj) {
+            using (
+                var dialog = new OpenFileDialog {
+                    Title = Constants.BrowseProjectUtilWindowTitle,
+                    DefaultExt = ".exe",
+                    Filter = @"*.exe|*.exe|All files (*.*)|*.*",
+                    Multiselect = false
+                }) { 
+                DialogResult result = dialog.ShowDialog();
+                if (result == DialogResult.OK) {
+                    ProjectUtilsPath = dialog.FileName;
+                }
+            }
+        }
+
+        private void BrowseDestFolder(object obj) {
+            using (
+                var dialog = new FolderBrowserDialog {
+                    Description = Constants.BrowseOutputFolderWindowDescription
+                }) {
+                DialogResult result = dialog.ShowDialog();
+                if (result == DialogResult.OK) {
+                    DestFolderPath = dialog.SelectedPath;
+                }
+            }
+        }
+
+        private void Save(object obj) {
             Settings.Default.ProjectUtilsPath = _projectUtilPath;
-            Settings.Default.Save();
-        }
-
-        private bool CanSaveProjectUtilsPath(object obj) {
-            return Settings.Default.ProjectUtilsPath != _projectUtilPath;
-        }
-
-        private void SaveDestPath(object obj) {
             Settings.Default.DestFolderPath = _destFolderPath;
             Settings.Default.Save();
         }
 
-        private bool CanSaveDestPath(object obj) {
-            return Settings.Default.DestFolderPath != _destFolderPath;
+        private bool CanSave(object obj) {
+            return Settings.Default.DestFolderPath != _destFolderPath 
+                   || Settings.Default.ProjectUtilsPath != _projectUtilPath; 
         }
     }
 }

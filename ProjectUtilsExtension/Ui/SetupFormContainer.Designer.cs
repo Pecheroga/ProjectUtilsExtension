@@ -38,7 +38,7 @@ namespace ProjectUtilsExtension.Ui
             // 
             this.elementHost1.Location = new System.Drawing.Point(12, 12);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(624, 100);
+            this.elementHost1.Size = new System.Drawing.Size(699, 135);
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.setupView1;
@@ -47,7 +47,7 @@ namespace ProjectUtilsExtension.Ui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 129);
+            this.ClientSize = new System.Drawing.Size(432, 157);
             this.Controls.Add(this.elementHost1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;

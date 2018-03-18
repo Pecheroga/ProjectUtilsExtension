@@ -8,10 +8,17 @@
     xmlns:viewModel="clr-namespace:ProjectUtilsExtension.Ui.ViewModel"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <viewModel:SetupViewModel x:Name="SetupViewModel" />
+        <viewModel:SetupViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="SaveBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="BlueViolet" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderBrush" Value="DarkGray" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -21,6 +28,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
@@ -31,7 +39,7 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="0"
-            Width="300"
+            Width="350"
             Height="25"
             VerticalContentAlignment="Center"
             Text="{Binding ProjectUtilsPath, UpdateSourceTrigger=PropertyChanged}" />
@@ -42,8 +50,8 @@
             Height="25"
             Margin="10,0,0,0"
             HorizontalAlignment="Left"
-            Command="{Binding SaveProjectUtilsPathCommand}">
-            Save
+            Command="{Binding BrowseProjectUtilsCommand}">
+            Open
         </Button>
         <TextBlock
             Grid.Row="2"
@@ -54,7 +62,7 @@
         <TextBox
             Grid.Row="3"
             Grid.Column="0"
-            Width="300"
+            Width="350"
             Height="25"
             VerticalContentAlignment="Center"
             Text="{Binding DestFolderPath, UpdateSourceTrigger=PropertyChanged}" />
@@ -65,7 +73,19 @@
             Height="25"
             Margin="10,0,0,0"
             HorizontalAlignment="Left"
-            Command="{Binding SaveDestPathCommand}">
+            Command="{Binding BrowseDestFolderCommand}">
+            Open
+        </Button>
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Width="50"
+            Height="25"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Command="{Binding SaveCommand}"
+            Style="{StaticResource SaveBtnStyle}">
             Save
         </Button>
     </Grid>
