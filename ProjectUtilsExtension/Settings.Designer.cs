@@ -46,5 +46,53 @@ namespace ProjectUtilsExtension {
                 this["DestFolderPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUseExcludedNamespace {
+            get {
+                return ((bool)(this["IsUseExcludedNamespace"]));
+            }
+            set {
+                this["IsUseExcludedNamespace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUseAddedNamespace {
+            get {
+                return ((bool)(this["IsUseAddedNamespace"]));
+            }
+            set {
+                this["IsUseAddedNamespace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AddedNamespace {
+            get {
+                return ((string)(this["AddedNamespace"]));
+            }
+            set {
+                this["AddedNamespace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExcludedNamespace {
+            get {
+                return ((string)(this["ExcludedNamespace"]));
+            }
+            set {
+                this["ExcludedNamespace"] = value;
+            }
+        }
     }
 }

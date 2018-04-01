@@ -12,6 +12,10 @@ namespace ProjectUtilsExtension.Core
     {
         private readonly string _projectUtilsPath = Settings.Default.ProjectUtilsPath;
         private readonly string _destFolderPath = Settings.Default.DestFolderPath;
+        private readonly string _excludedNamespace = Settings.Default.ExcludedNamespace;
+        private readonly string _addedNamespace = Settings.Default.AddedNamespace;
+        private readonly bool _isUseExcludedNamespace = Settings.Default.IsUseExcludedNamespace;
+        private readonly bool _isUseAddedNamespace = Settings.Default.IsUseAddedNamespace;
         private string _selectedFolderPath;
         private string _outputNamespace = Constants.FirstPartOfDefaultNamespase;
         private bool _isSelectedFolderPathAndName;
@@ -86,9 +90,8 @@ namespace ProjectUtilsExtension.Core
         }
 
         private void TryToMerge() {
-            var argument = $"MergeFile -ip=\"{_selectedFolderPath}\" -op=\"{_destFolderPath}\" -n=\"{_outputNamespace}\"";
             var myProcess = new Process {
-                StartInfo = new ProcessStartInfo(_projectUtilsPath, argument) {
+                StartInfo = new ProcessStartInfo(_projectUtilsPath, CreateArguments()) {
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false
@@ -106,6 +109,17 @@ namespace ProjectUtilsExtension.Core
                 ResponseOutput = Constants.CantStartProcessMessage + Environment.NewLine;
                 ResponseErorr = ex.Message;
             }
+        }
+
+        private string CreateArguments() {
+            var arguments = $"MergeFile -ip=\"{_selectedFolderPath}\" -op=\"{_destFolderPath}\" -n=\"{_outputNamespace}\"";
+            if (_isUseExcludedNamespace && !string.IsNullOrEmpty(_excludedNamespace)) {
+                arguments += $" -en=\"{_excludedNamespace}\"";
+            }
+            if (_isUseAddedNamespace && !string.IsNullOrEmpty(_addedNamespace)) {
+                arguments += $" -an=\"{_addedNamespace}\"";
+            }
+            return arguments;
         }
     }
 }

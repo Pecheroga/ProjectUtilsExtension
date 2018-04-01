@@ -10,5 +10,7 @@
         public const string SettingsSetDestinationPathTip = "Destination full folder path:";
         public const string BrowseProjectUtilWindowTitle = "Select ProjectUtils executing file";
         public const string BrowseOutputFolderWindowDescription = "Select output folder to store merged code:";
+        public const string ExcludeNamespaceTip = "Exclude namespace by Regex (e.g.: \"using System.Text\\S*\\r?\\n)\":";
+        public const string AddNamespaceTip = "Add namespace (comma separator):";
     }
 }

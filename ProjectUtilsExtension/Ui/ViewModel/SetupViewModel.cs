@@ -24,6 +24,42 @@ namespace ProjectUtilsExtension.Ui.ViewModel
             }
         }
 
+        private string _excludedNamespace = Settings.Default.ExcludedNamespace;
+        public string ExcludedNamespace {
+            get => _excludedNamespace;
+            set {
+                _excludedNamespace = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _addedNamespace = Settings.Default.AddedNamespace;
+        public string AddedNamespace {
+            get => _addedNamespace;
+            set {
+                _addedNamespace = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isUseExcludedNamespace = Settings.Default.IsUseExcludedNamespace;
+        public bool IsUseExcludedNamespace {
+            get => _isUseExcludedNamespace;
+            set {
+                _isUseExcludedNamespace = value; 
+                OnPropertyChanged();
+            }
+        }
+        
+        private bool _isUseAddedNamespace = Settings.Default.IsUseAddedNamespace;
+        public bool IsUseAddedNamespace {
+            get => _isUseAddedNamespace;
+            set {
+                _isUseAddedNamespace = value;
+                OnPropertyChanged();
+            }
+        }
+
         public DelegateCommand BrowseProjectUtilsCommand { get; private set; }
         public DelegateCommand BrowseDestFolderCommand { get; private set; }
         public DelegateCommand SaveCommand { get; private set; }
@@ -68,12 +104,20 @@ namespace ProjectUtilsExtension.Ui.ViewModel
         private void Save(object obj) {
             Settings.Default.ProjectUtilsPath = _projectUtilPath;
             Settings.Default.DestFolderPath = _destFolderPath;
+            Settings.Default.ExcludedNamespace = _excludedNamespace;
+            Settings.Default.AddedNamespace = _addedNamespace;
+            Settings.Default.IsUseExcludedNamespace = _isUseExcludedNamespace;
+            Settings.Default.IsUseAddedNamespace = _isUseAddedNamespace;
             Settings.Default.Save();
         }
 
         private bool CanSave(object obj) {
             return Settings.Default.DestFolderPath != _destFolderPath 
-                   || Settings.Default.ProjectUtilsPath != _projectUtilPath; 
+                   || Settings.Default.ProjectUtilsPath != _projectUtilPath 
+                   || Settings.Default.ExcludedNamespace != _excludedNamespace 
+                   || Settings.Default.AddedNamespace != _addedNamespace 
+                   || Settings.Default.IsUseExcludedNamespace != _isUseExcludedNamespace
+                   || Settings.Default.IsUseAddedNamespace != _isUseAddedNamespace; 
         }
     }
 }

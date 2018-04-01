@@ -28,6 +28,10 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock
@@ -76,8 +80,48 @@
             Command="{Binding BrowseDestFolderCommand}">
             Open
         </Button>
-        <Button
+        <TextBlock
             Grid.Row="4"
+            Grid.Column="0"
+            Margin="5,0,0,0"
+            VerticalAlignment="Bottom"
+            Text="{x:Static core:Constants.ExcludeNamespaceTip}" />
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="0"
+            Width="350"
+            Height="25"
+            VerticalContentAlignment="Center"
+            IsEnabled="{Binding IsUseExcludedNamespace}"
+            Text="{Binding ExcludedNamespace, UpdateSourceTrigger=PropertyChanged}" />
+        <CheckBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            VerticalAlignment="Center"
+            IsChecked="{Binding IsUseExcludedNamespace}" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Margin="5,0,0,0"
+            VerticalAlignment="Bottom"
+            Text="{x:Static core:Constants.AddNamespaceTip}" />
+        <TextBox
+            Grid.Row="7"
+            Grid.Column="0"
+            Width="350"
+            Height="25"
+            VerticalContentAlignment="Center"
+            IsEnabled="{Binding IsUseAddedNamespace}"
+            Text="{Binding AddedNamespace, UpdateSourceTrigger=PropertyChanged}" />
+        <CheckBox
+            Grid.Row="7"
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            VerticalAlignment="Center"
+            IsChecked="{Binding IsUseAddedNamespace}" />
+        <Button
+            Grid.Row="8"
             Grid.Column="0"
             Width="50"
             Height="25"
